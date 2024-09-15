@@ -18,6 +18,42 @@ function getPosition()
     return xScreenPos, yScreenPos, xLevelPos
 end
 
+function readInputFromCPP()
+    local filePath = "C:/Users/eirik/Source/Repos/Super_Mario_NES_AI/input.txt"    
+    local file = io.open(filePath, "r")
+    if file then
+        local command = file:read("*all")
+        file:close()
+
+        -- set up player 1
+        local P1 = joypad.get(1)
+
+        local inputTable = {}
+        if command == "LEFT" then
+            P1["P1 Left"] = true
+        elseif command == "A" then
+            P1["P1 A"] = true
+        elseif command == "RIGHT" then
+            P1["P1 Right"] = true
+        end
+
+
+        -- Read input from file depending on what was entered
+        local inputTable = {}
+        if command == "LEFT" then
+            inputTable["P1 Left"] = true
+        elseif command == "A" then
+            inputTable["P1 A"] = true
+        elseif command == "RIGHT" then
+            inputTable["P1 Right"] = true
+        end
+
+    joypad.set(P1)
+
+    --joypad.set(1, inputTable)
+    end
+end
+
 -- Function to write the frame information and positions to a file
 function writeFrameInfoToFile(xScreenPos, yScreenPos, xLevelPos)
     -- Get the current frame count
@@ -53,6 +89,9 @@ while true do
     -- Write the frame information and positions to the file
     writeFrameInfoToFile(xScreenPos, yScreenPos, xLevelPos)
     
+    -- Read input from CPP and execute
+    readInputFromCPP()
+
     -- Advance to the next frame in BizHawk
     emu.frameadvance()
 end

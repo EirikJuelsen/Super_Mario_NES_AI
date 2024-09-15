@@ -7,6 +7,13 @@
 #include <thread> // For std::this_thread::sleep_for
 #include <chrono> // For std::chrono::milliseconds
 
+
+void sendInputToBizHawk(const std::string& command) {
+    std::ofstream outFile("C:/Users/eirik/Source/Repos/Super_Mario_NES_AI/input.txt");
+    outFile << command;  // Command could be something like "LEFT", "A", etc.
+    outFile.close();
+}
+
 void readValuesFromFile() {
     // Specify the path to the file
     std::string filePath = "C:/Users/eirik/Source/Repos/Super_Mario_NES_AI/frame_info.txt"; // For Windows
@@ -60,6 +67,12 @@ int main() {
     while (true) {
         // Continuously read the position from the file
         readValuesFromFile();
+
+        // Calculate which input should be used
+
+        // Send input to BizHawk
+        // EXAMPLE: "RIGHT"
+        sendInputToBizHawk("RIGHT");
 
         // Wait for the duration of one frame
         std::this_thread::sleep_for(std::chrono::milliseconds(frameDurationMs));

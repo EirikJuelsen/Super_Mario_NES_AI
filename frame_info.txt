@@ -1,4 +1,4 @@
-Frame count: 396695
-X Position on screen: 40
-Y Position on screen: 208
-X Position in level: 208
+Frame count: 30663
+X Position on screen: 133
+Y Position on screen: 120
+X Position in level: 120
