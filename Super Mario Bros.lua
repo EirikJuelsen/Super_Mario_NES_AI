@@ -10,6 +10,9 @@ function getPosition()
 
     -- Read the Y position from memory (8-bit value at address 0x0002)
     local xLevelPos = memory.readbyte(0x0086)
+
+    -- Read the direction from memory (8-bit value at address 0x0002) 1 = left, 2 = right
+    local direction = memory.readbyte(0x003)
     
     -- Print the X and Y positions to the console
     -- print("X Level Position: " .. xLevelPos)
@@ -28,25 +31,20 @@ function readInputFromCPP()
         -- set up player 1
         local P1 = joypad.get(1)
 
-        local inputTable = {}
         if command == "LEFT" then
             P1["P1 Left"] = true
-        elseif command == "A" then
-            P1["P1 A"] = true
         elseif command == "RIGHT" then
             P1["P1 Right"] = true
-        end
-
-
-        -- Read input from file depending on what was entered
-        local inputTable = {}
-        if command == "LEFT" then
-            inputTable["P1 Left"] = true
         elseif command == "A" then
-            inputTable["P1 A"] = true
-        elseif command == "RIGHT" then
-            inputTable["P1 Right"] = true
+            P1["P1 A"] = true
+        elseif command == "B" then
+            P1["P1 B"] = true
+        elseif command == "DOWN" then
+            P1["P1 Down"] = true
+        elseif command == "UP" then
+            P1["P1 Up"] = true
         end
+
 
     joypad.set(P1)
 
